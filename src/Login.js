@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { auth, provider } from "./FirebaseConfig";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-function Login({ setToken }) {
-  const navigate = useNavigate(); // Get history from the hook
 
+function Login() {
+  const navigate = useNavigate();
+
+  // Define the handleGoogleSignIn function outside of useEffect
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
         const userId = user.uid;
-        setToken(userId); // Set the token (userId) in the parent component
-        navigate("/upload-pdf"); // Redirect to the "Upload PDF" page after successful login
+        navigate(`/upload-pdf/${userId}`);
       })
       .catch((err) => {
         console.log(err);

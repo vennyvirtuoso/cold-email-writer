@@ -16,10 +16,9 @@ function UploadPDF() {
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    console.log(userId);
     try {
       const text = await extractTextFromPDF(file);
-      console.log(text);
+
       try {
         await saveresume(text, userId);
         navigate("/generate-email");

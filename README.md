@@ -19,7 +19,7 @@ To install the Cold Email Writer, follow these steps:
 1. Clone the repository to your local machine:
 
 '''bash
-git clone https://github.com/yourusername/cold-email-writer.git
+git clone https://github.com/vennyvirtuoso/cold-email-writer.git
 cd cold-email-writer
 npm install
 npm start

@@ -1,12 +1,10 @@
-import React from "react";
-import { auth, provider } from "./FirebaseConfig";
 import { signInWithPopup } from "firebase/auth";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import { auth, provider } from "../../configs/FirebaseConfig";
+import "./Login.css";
 function Login() {
   const navigate = useNavigate();
-
-  // Define the handleGoogleSignIn function outside of useEffect
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {

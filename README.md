@@ -1,14 +1,14 @@
 # Project Title
 
-A brief description of your project.
+cold-email-writer
+huge credits to anurag soni for making uploadPDF work, this guy is awesome!!
 
 ## Getting Started
 
-These instructions will help you set up and run the project on your local machine.
-
 ### Prerequisites
 
-List any prerequisites or system requirements here.
+vs code
+4GB RAM
 
 ### Installing
 

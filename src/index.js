@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./style.css";
-import reportWebVitals from "./reportWebVitals";
+
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 import App from "./App";
@@ -12,4 +12,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-reportWebVitals();

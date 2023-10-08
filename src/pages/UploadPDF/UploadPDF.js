@@ -1,19 +1,14 @@
 import React, { useState } from "react";
+import { pdfjs } from "react-pdf";
 import { useParams } from "react-router-dom";
-import { Document, Page, pdfjs } from "react-pdf";
-import { db } from "./FirebaseConfig";
+import { saveresume } from "../../Functions/saveResume";
+import { useNavigate } from "react-router-dom";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-
-const handleLogoutClick = () => {
-  window.location.href = "/logout";
-};
-
 function UploadPDF() {
+  const navigate = useNavigate();
   const { userId } = useParams();
-
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [pdfText, setPdfText] = useState("");
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
@@ -26,13 +21,12 @@ function UploadPDF() {
       const text = await extractTextFromPDF(file);
       console.log(text);
 
-      setPdfText(text);
-      // saveresume();
+      saveresume(text, userId);
+      navigate("/generate-email");
     } catch (error) {
       console.error("Error extracting text from PDF:", error);
     }
   };
-
   const extractTextFromPDF = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -59,39 +53,13 @@ function UploadPDF() {
       reader.readAsArrayBuffer(file);
     });
   };
+  const handleLogoutClick = () => {
+    window.location.href = "/logout";
+  };
 
-  //   return (
-  //     <div>
-  //       <h1 onClick={handleLogoutClick}>Logout</h1>
-  //       <h1>Upload PDF</h1>
-  //       <p>Choose a PDF file to upload:</p>
-  //       <input type="file" accept=".pdf" onChange={handleFileUpload} />
-  //     </div>
-  //   );
-  // }
-
-  // export default UploadPDF;
-
-  //testing
-  // save resume is not working currectly so handlefileupload is giving error
-  function saveresume() {
-    console.log("hello");
-    if (pdfText != null) {
-      db.collection("resume")
-        .doc(userId)
-        .set({
-          text: pdfText,
-        })
-        .then(() => {
-          console.log("Text saved to Firebase Firestore");
-        })
-        .catch((error) => {
-          console.error("Error saving text to Firebase Firestore:", error);
-        });
-    }
-  }
   return (
     <div>
+      <button onClick={handleLogoutClick}>Logout</button>
       <h1>Upload PDF</h1>
       <p>Choose a PDF file to upload:</p>
       <input type="file" accept=".pdf" onChange={handleFileUpload} />

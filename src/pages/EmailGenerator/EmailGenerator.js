@@ -13,9 +13,12 @@ function EmailGenerator() {
       setGeneratedEmail("");
     }
   };
-
+  const handleLogoutClick = () => {
+    window.location.href = "/logout";
+  };
   return (
     <div>
+      <button onClick={handleLogoutClick}>Logout</button>
       <h1>Email Generator</h1>
       <div>
         <label htmlFor="companyName">Company Name:</label>

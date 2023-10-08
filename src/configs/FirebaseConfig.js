@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDG0t33MQlhYz2h_55K9cm6o0_xU275FoE",
   authDomain: "cold-email-writer-1e2ba.firebaseapp.com",

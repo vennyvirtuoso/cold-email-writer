@@ -20,9 +20,14 @@ function UploadPDF() {
     try {
       const text = await extractTextFromPDF(file);
       console.log(text);
-
-      saveresume(text, userId);
-      navigate("/generate-email");
+      try {
+        await saveresume(text, userId);
+        navigate("/generate-email");
+      } catch (error) {
+        console.error("Error saving resume:", error);
+      }
+      // saveresume(text, userId);
+      // navigate("/generate-email");
     } catch (error) {
       console.error("Error extracting text from PDF:", error);
     }
@@ -53,13 +58,9 @@ function UploadPDF() {
       reader.readAsArrayBuffer(file);
     });
   };
-  const handleLogoutClick = () => {
-    window.location.href = "/logout";
-  };
 
   return (
     <div>
-      <button onClick={handleLogoutClick}>Logout</button>
       <h1>Upload PDF</h1>
       <p>Choose a PDF file to upload:</p>
       <input type="file" accept=".pdf" onChange={handleFileUpload} />

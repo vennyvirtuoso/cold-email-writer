@@ -1,0 +1,56 @@
+/* UploadPDF.css */
+
+.upload-pdf-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #3498db; /* Border color */
+  border-radius: 8px;
+  background-color: #ecf0f1; /* Background color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  opacity: 0; /* Initial opacity for animation */
+  animation: fadeIn 0.5s forwards; /* Animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+h1 {
+  color: #3498db; /* Heading color */
+}
+
+p {
+  color: #555;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  background-color: #2ecc71; /* Button color */
+  color: #fff; /* Button text color */
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 20px;
+  transition: background-color 0.3s; /* Smooth color transition */
+}
+
+.custom-file-upload:hover {
+  background-color: #27ae60; /* Button color on hover */
+}
+
+@media (max-width: 600px) {
+  .upload-pdf-container {
+    padding: 10px;
+  }
+}

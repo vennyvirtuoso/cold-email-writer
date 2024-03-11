@@ -3,7 +3,10 @@ import { pdfjs } from "react-pdf";
 import { useParams } from "react-router-dom";
 import { saveresume } from "../../Functions/saveResume";
 import { useNavigate } from "react-router-dom";
+import "./UploadPDF.css"; // Create this file
+import { useEffect } from "react";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
 function UploadPDF() {
   const navigate = useNavigate();
   const { userId } = useParams();
@@ -13,24 +16,28 @@ function UploadPDF() {
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
   };
-
+  useEffect(() => {
+    // Remove opacity for subsequent renders
+    const container = document.querySelector(".upload-pdf-container");
+    container.style.opacity = 1;
+  }, []);
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     try {
       const text = await extractTextFromPDF(file);
 
       try {
+        // Use saveresume function to append the new resume
         await saveresume(text, userId);
         navigate("/generate-email");
       } catch (error) {
         console.error("Error saving resume:", error);
       }
-      // saveresume(text, userId);
-      // navigate("/generate-email");
     } catch (error) {
       console.error("Error extracting text from PDF:", error);
     }
   };
+
   const extractTextFromPDF = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -59,11 +66,15 @@ function UploadPDF() {
   };
 
   return (
-    <div>
+    <div className="upload-pdf-container">
       <h1>Upload PDF</h1>
       <p>Choose a PDF file to upload:</p>
-      <input type="file" accept=".pdf" onChange={handleFileUpload} />
+      <label htmlFor="file" className="custom-file-upload">
+        Browse
+      </label>
+      <input type="file" id="file" accept=".pdf" onChange={handleFileUpload} />
     </div>
   );
 }
+
 export default UploadPDF;

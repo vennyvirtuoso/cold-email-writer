@@ -23,22 +23,19 @@ function EmailGenerator() {
     if (companyName && role && userEmail) {
       setIsLoading(true); // Set loading to true when starting the request
 
-      const email = `${role.replace(/\s/g, "")}.${companyName.replace(
-        /\s/g,
-        ""
-      )}`;
-
-      // setGeneratedEmail(email);
+      const emailBackendUrl = process.env.REACT_APP_BACKEND_URL;
 
       axios
-        .post("https://example.com/api/your-endpoint", {
+        .post(`${emailBackendUrl}/api/generate_email`, {
           role,
           companyName,
           userEmail,
         })
         .then((response) => {
           console.log("POST request successful:", response.data);
-          setGeneratedEmail(response.data.generatedEmail);
+          // Replace \n with <br /> to display new lines in HTML
+          const formattedEmail = response.data.generatedEmail.replace(/\n/g, '<br />');
+          setGeneratedEmail(formattedEmail); // Set it in frontend after we receive it
         })
         .catch((error) => {
           console.error("Error making POST request:", error);
@@ -100,12 +97,12 @@ function EmailGenerator() {
         {generatedEmail && (
           <div className="result-container">
             <h2>Generated Email:</h2>
-            <p>{generatedEmail}</p>
+            {/* Use dangerouslySetInnerHTML to render the new lines as HTML */}
+            <p dangerouslySetInnerHTML={{ __html: generatedEmail }}></p>
           </div>
         )}
       </main>
     </div>
   );
 }
-
 export default EmailGenerator;

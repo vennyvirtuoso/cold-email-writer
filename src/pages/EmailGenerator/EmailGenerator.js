@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { auth } from "../../configs/FirebaseConfig"; // Update the path accordingly
+import { auth } from "../../configs/FirebaseConfig";
 import "./emailGenerator.css";
 import "firebase/auth";
 
@@ -9,9 +9,9 @@ function EmailGenerator() {
   const [role, setRole] = useState("");
   const [generatedEmail, setGeneratedEmail] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
 
   useEffect(() => {
-    // Check if a user is already authenticated
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUserEmail(user.email);
@@ -21,37 +21,30 @@ function EmailGenerator() {
 
   const generateEmail = () => {
     if (companyName && role && userEmail) {
+      setIsLoading(true); // Set loading to true when starting the request
+
       const email = `${role.replace(/\s/g, "")}.${companyName.replace(
         /\s/g,
         ""
-      )}@exam.result-container`;
-      setGeneratedEmail(email);
+      )}`;
 
-      // debugging
-      // console.log("Role:", role);
-      // console.log("Company Name:", companyName);
+      // setGeneratedEmail(email);
 
-      // Make a POST request to the server endpoint with the actual user ID
       axios
         .post("https://example.com/api/your-endpoint", {
           role,
           companyName,
-          userEmail, // Send the authenticated user's email
+          userEmail,
         })
         .then((response) => {
           console.log("POST request successful:", response.data);
-
-          // Handle the response data here
-          // For example, you can set some state or perform additional actions
-
-          // Set the generated email or perform any other actions based on the response
           setGeneratedEmail(response.data.generatedEmail);
-
-          // Handle any success actions here
         })
         .catch((error) => {
           console.error("Error making POST request:", error);
-          // Handle errors here
+        })
+        .finally(() => {
+          setIsLoading(false); // Set loading to false regardless of success or failure
         });
     } else {
       setGeneratedEmail("");
@@ -62,12 +55,10 @@ function EmailGenerator() {
     auth
       .signOut()
       .then(() => {
-        // Sign-out successful.
         window.location.href = "/logout";
       })
       .catch((error) => {
         console.error("Error signing out:", error);
-        // Handle errors here
       });
   };
 
@@ -99,8 +90,12 @@ function EmailGenerator() {
             onChange={(e) => setRole(e.target.value)}
           />
         </div>
-        <button className="generate-button" onClick={generateEmail}>
-          Generate
+        <button
+          className="generate-button"
+          onClick={generateEmail}
+          disabled={isLoading}
+        >
+          {isLoading ? "Generating..." : "Generate"}
         </button>
         {generatedEmail && (
           <div className="result-container">

@@ -9,7 +9,7 @@ function EmailGenerator() {
   const [role, setRole] = useState("");
   const [generatedEmail, setGeneratedEmail] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
+  const [isLoading, setIsLoading] = useState(false);  // New state for loading indicator
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {

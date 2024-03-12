@@ -1,11 +1,30 @@
 /* Login.css */
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
 .login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url("https://img.freepik.com/free-vector/circles-background-dark-tones_60389-166.jpg?t=st=1710195657~exp=1710199257~hmac=341b0c878a979e0fc98732a6ea4a6da6dae708ed93b66d0b7e7f8d20f4582dd1&w=2000");
+  /* background-image: url("https://img.freepik.com/free-vector/circles-background-dark-tones_60389-166.jpg?t=st=1710195657~exp=1710199257~hmac=341b0c878a979e0fc98732a6ea4a6da6dae708ed93b66d0b7e7f8d20f4582dd1&w=2000"); */
   background-size: cover;
   background-position: center;
 }

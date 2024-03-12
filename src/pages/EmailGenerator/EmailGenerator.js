@@ -39,6 +39,7 @@ function EmailGenerator() {
         })
         .catch((error) => {
           console.error("Error making POST request:", error);
+          alert("Error making POST request:", error)
         })
         .finally(() => {
           setIsLoading(false); // Set loading to false regardless of success or failure
@@ -56,6 +57,7 @@ function EmailGenerator() {
       })
       .catch((error) => {
         console.error("Error signing out:", error);
+        alert("Error signing out:", error)
       });
   };
 

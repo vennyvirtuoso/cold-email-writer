@@ -1,10 +1,11 @@
-/* Login.css */
 @import url("https://fonts.googleapis.com/css2?family=Asap&family=Roboto:ital,wght@0,500;0,900;1,500&display=swap");
+
 .heading-box {
   background-color: #ffffff;
   padding: 20px;
-  border-radius: 50px;
+  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  margin-top: 100px;
   margin-bottom: 20px;
   box-shadow: 0 20px 10px rgba(0, 0, 0, 0.11);
 }
@@ -14,15 +15,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   background-size: 400% 400%;
   height: 100vh;
-  margin: 0px;
-  padding: 0px;
-  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "Asap", "Roboto", Helvetica, sans-serif;
   background-color: #fdfdfe;
-
-  /* Add the background pattern here */
   background-image: linear-gradient(
       45deg,
       transparent 20%,
@@ -36,21 +34,20 @@
 }
 
 .page-title {
-  font-family: Helvetica, sans-serif;
+  font-family: "Asap", "Roboto", Helvetica, sans-serif;
   font-size: 70px;
   font-weight: 600;
   background-image: url("https://as1.ftcdn.net/v2/jpg/05/03/55/14/1000_F_503551426_zBepFeDt56OCRa5sdtPOdsbmg3CZFOOR.jpg");
   background-size: 250px;
   background-repeat: repeat;
-
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
   transition: all ease-in-out 2s;
   cursor: pointer;
   margin-bottom: 20px;
-  position: relative; /* Add position relative for z-index */
-  z-index: 5; /* Set a positive z-index to bring text above the background */
+  position: relative;
+  z-index: 5;
 }
 
 .page-title:hover {
@@ -76,6 +73,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin-bottom: 150px;
 }
 
 .login-box {
@@ -90,7 +88,7 @@
   color: #fff;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
@@ -99,4 +97,16 @@
 
 .login-btn:hover {
   background-color: #c82333;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 768px) {
+  .login-page {
+    background-size: 200% 200%;
+  }
+
+  .page-title {
+    font-size: 40px;
+  }
 }

@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import Logout from "./components/Logout/Logout";
 import UploadPDF from "./pages/UploadPDF/UploadPDF";
 import EmailGenerator from "./pages/EmailGenerator/EmailGenerator";
+
 function App() {
   return (
     <div className="wrapper">

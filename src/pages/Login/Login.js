@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, provider } from "../../configs/FirebaseConfig";
-import { doc, getFirestore, setDoc, getDoc } from "firebase/firestore";
-import "./Login.css";
 import { checkIfUserExists } from "../../Functions/checkResume";
+import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -29,14 +28,19 @@ function Login() {
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-box">
-        <button
-          className="login-btn btn-danger btn-md"
-          onClick={handleGoogleSignIn}
-        >
-          Sign In With Google
-        </button>
+    <div className="login-page">
+      <div className="heading-box">
+        <h1 className="page-title">Cold Crafter</h1>
+      </div>
+      <div className="login-wrapper">
+        <div className="login-box">
+          <button
+            className="login-btn btn-danger btn-md"
+            onClick={handleGoogleSignIn}
+          >
+            Sign In With Google
+          </button>
+        </div>
       </div>
     </div>
   );

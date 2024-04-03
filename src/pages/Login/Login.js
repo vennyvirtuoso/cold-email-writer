@@ -30,7 +30,7 @@ function Login() {
   return (
     <div className="login-page">
       <div className="heading-box">
-        <h1 className="page-title">Cold Crafter</h1>
+        <h1 className="page-title">Genius Draft</h1>
       </div>
       <div className="login-wrapper">
         <div className="login-box">
